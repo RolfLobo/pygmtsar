@@ -212,6 +212,12 @@ class Tiles(datagrid, tqdm_joblib):
         tile_xarrays = [tile for tile in tile_xarrays if tile is not None]
         if len(tile_xarrays) == 0:
             return
+        shapes = [tile.shape for tile in tile_xarrays]
+        assert len(np.unique(shapes)) == 1, (
+            f'ERROR: Inconsistent tile shapes detected: {shapes}. '
+            'All tiles must have the same shape to be combined correctly. '
+            'This is a known issue with the Copernicus DEM — consider using the SRTM DEM instead.'
+        )
         da = xr.combine_by_coords(tile_xarrays)
         # drop duplicate indices for SRTM DEM when neighboring tiles share the same edge coordinates
         da = da.sel(lat=~da.indexes['lat'].duplicated(), lon=~da.indexes['lon'].duplicated())
