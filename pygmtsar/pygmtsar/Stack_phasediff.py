@@ -65,16 +65,18 @@ class Stack_phasediff(Stack_topo):
             #print (f'Interferogram pairs: {len(pairs)}')
             chunk, dates = self.get_pairs(chunk, dates=True)
             # load Sentinel-1 data
-            data = self.open_data(dates, subswath=subswath, debug=debug)
+            data_chunk = self.open_data(dates, subswath=subswath, debug=debug)
             if weight is not None:
-                data = data.reindex_like(weight, fill_value=np.nan)
-            intensity = np.square(np.abs(data))
+                data_chunk = data_chunk.reindex_like(weight, fill_value=np.nan)
+            intensity = np.square(np.abs(data_chunk))
             # Gaussian filtering 200m cut-off wavelength with optional range multilooking on Sentinel-1 amplitudes
             intensity_look = self.multilooking(intensity, wavelength=wavelength, coarsen=coarsen, debug=debug)
             del intensity
+            phase_chunk = phase[phase.pair.isin(chunk.pair)] if phase is not None else None
             # calculate phase difference with topography correction
-            phasediff = self.phasediff(chunk, data, topo=topo, phase=phase, method=method, joblib_backend=joblib_backend, debug=debug)
-            del data
+            phasediff = self.phasediff(chunk, data_chunk, topo=topo, phase=phase_chunk, method=method,
+                                       joblib_backend=joblib_backend, debug=debug)
+            del data_chunk, phase_chunk
             # Gaussian filtering 200m cut-off wavelength with optional range multilooking
             phasediff_look = self.multilooking(phasediff, weight=weight,
                                                wavelength=wavelength, coarsen=coarsen, debug=debug)
