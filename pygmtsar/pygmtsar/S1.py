@@ -14,9 +14,9 @@ class S1(tqdm_joblib):
     from datetime import timedelta
 
     http_timeout = 30
-    #https://s1orbits.pechnikov.workers.dev/S1A/2014/04/07/index.csv
-    #https://s1orbits.pechnikov.workers.dev/S1A/2014/04/07/S1A_OPER_AUX_POEORB_OPOD_20210301T130653_V20140406T225944_20140408T005944.EOF.zip
-    orbits_url = 'https://s1orbits.pechnikov.workers.dev/{mission}/{year}/{month:02}/{day:02}/'
+    #https://s1orbits.insar.dev/S1A/2014/04/07/index.csv
+    #https://s1orbits.insar.dev/S1A/2014/04/07/S1A_OPER_AUX_POEORB_OPOD_20210301T130653_V20140406T225944_20140408T005944.EOF.zip
+    orbits_url = 'https://s1orbits.insar.dev/{mission}/{year}/{month:02}/{day:02}/'
     # see _select_orbit.py in sentineleof package
     #Orbital period of Sentinel-1 in seconds
     #T_ORBIT = (12 * 86400.0) / 175.0
