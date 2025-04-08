@@ -41,7 +41,10 @@ class Stack_reframe(Stack_reframe_gmtsar):
         import numpy as np
         #import shapely
         from shapely.geometry import Point, LineString, Polygon, MultiPolygon
-        from shapely.ops import cascaded_union
+        try:
+            from shapely.ops import cascaded_union as union_all
+        except ImportError:
+            from shapely.ops import unary_union as union_all
         from datetime import datetime, timedelta
         import os
         import xmltodict
@@ -140,7 +143,7 @@ class Stack_reframe(Stack_reframe_gmtsar):
         out['metapath'] = new_filename + '.xml'
         out['datapath'] = new_filename + '.tiff'
         # update approximate location
-        out['geometry'] = cascaded_union([geom for multi_polygon in df.geometry for geom in multi_polygon.geoms
+        out['geometry'] = union_all([geom for multi_polygon in df.geometry for geom in multi_polygon.geoms
                                       if geom.intersects(geometry)])
 
         # merge calibration xml files
