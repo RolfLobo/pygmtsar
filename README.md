@@ -5,6 +5,23 @@
 [![Support on Patreon](https://img.shields.io/badge/Patreon-Support-orange.svg)](https://www.patreon.com/pechnikov)
 [![ChatGPT Assistant](https://img.shields.io/badge/ChatGPT-Assistant-green?logo=openai)](https://insar.dev/ai)
 
+## Announcement: InSAR.dev—A Federated Python Ecosystem for InSAR
+
+InSAR.dev is the next evolution of PyGMTSAR and is under active development. Whereas PyGMTSAR processes single-polarization scenes and bursts along one orbital path, InSAR.dev separates the workflow into two phases: preparing SLC data (including geocoding, flat-earth and topographic correction, and packaging into cloud-ready bursts) and then performing the core interferometric analysis on those datasets. This design scales to hundreds or thousands of bursts across multiple polarizations and orbital paths.
+
+For example, the following interactive notebooks demonstrate processing of 8 Sentinel-1 scenes (~1000 bursts) across 2 orbital paths and 2 polarizations (VH, VV):
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1KsHRDz1XVtDWAkJMXK0gdpMiEfHNvXB3?usp=sharing) InSAR.dev Sentinel-1 SLC Burst Preprocessing.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/156Gvd-0C7DrXWDe1JCSxJyE-s1FyZeDl?usp=sharing) InSAR.dev Sentinel‑1 Multi‑Polarization and Multi‑Path Interferograms (adopted for slow 2 vCPU free Google Colab).
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1g_mZK6YZ614t45D1zKCO-U_X5E6hfknz?usp=sharing) InSAR.dev Sentinel‑1 Multi‑Polarization and Multi‑Path Interferograms on Google Colab Pro.
+
+The InSAR.dev ecosystem comprises three Python packages. **insardev_toolkit** provides utility functions and helpers; **insardev_pygmtsar**handles Sentinel‑1 SLC preprocessing (requires GMTSAR binaries); and **insardev** performs core interferometric processing and analysis with no external dependencies. Both **insardev_toolkit** and **insardev_pygmtsar** are BSD‑licensed, while **insardev** may require a subscription for certain use cases.
+
+InSAR.dev documentation, use cases and project updates are available on [Patreon](https://www.patreon.com/pechnikov).
+
+
 ## PyGMTSAR (Python InSAR): Powerful, Accessible Satellite Interferometry
 
 <img src="assets/logo.jpg" width="15%" />
